@@ -11,17 +11,4 @@ file(GLOB PROJECT_SOURCES
   ${PROJECT_SOURCE_DIR}/*.cpp
   ${PROJECT_SOURCE_DIR}/*.h)
 
-add_library(DemoAdd ${PROJECT_SOURCES})
-
-install(TARGETS DemoAdd
-  EXPORT demo-vcpkg-lib-targets
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin
-)
-
-install(
-  EXPORT demo-vcpkg-lib-targets
-  DESTINATION share/demo-vcpkg-lib
-  NAMESPACE demo-vcpkg-lib::
-)
+add_library(DemoAdd STATIC ${PROJECT_SOURCES})
