@@ -14,9 +14,14 @@ file(GLOB PROJECT_SOURCES
 add_library(DemoAdd ${PROJECT_SOURCES})
 
 install(TARGETS DemoAdd
-  CONFIGURATIONS Debug
-  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Debug/bin)
+  EXPORT demo-vcpkg-lib-targets
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
-install(TARGETS DemoAdd
-  CONFIGURATIONS Release
-  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Release/bin)
+install(
+  EXPORT demo-vcpkg-lib-targets
+  DESTINATION share/demo-vcpkg-lib
+  NAMESPACE demo-vcpkg-lib::
+)
