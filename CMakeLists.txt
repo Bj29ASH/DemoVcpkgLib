@@ -8,12 +8,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB PROJECT_SOURCES
-  ${PROJECT_SOURCE_DIR}/*.cpp)
+  ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 file(GLOB PROJECT_HEADERS
-  ${PROJECT_SOURCE_DIR}/*.h)
+  ${PROJECT_SOURCE_DIR}/include/*.h)
 
 add_library(DemoAdd STATIC ${PROJECT_SOURCES})
+
+target_include_directories(DemoAdd PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
 
 install(
   TARGETS DemoAdd
@@ -36,7 +41,6 @@ install(
   FILES "${CMAKE_CURRENT_BINARY_DIR}/DemoAdd-config.cmake"
   DESTINATION "share/DemoAdd"
 )
-
 install(
   EXPORT DemoAdd-targets
   DESTINATION share/DemoAdd
